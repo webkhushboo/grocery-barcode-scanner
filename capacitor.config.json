@@ -1,0 +1,14 @@
+{
+  "appId": "io.ionic.grocerybarcodescanner",
+  "appName": "Grocery Barcode Scanner",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000,
+      "backgroundColor": "#3880ff"
+    }
+  }
+}
