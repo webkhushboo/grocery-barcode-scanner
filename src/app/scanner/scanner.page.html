@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Barcode Scanner</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Main content container -->
+  <div class="main-container">
+    <!-- Scanner section -->
+    <div class="scanner-section">
+      <h2 class="section-title">Scan a Barcode</h2>
+      
+      <!-- Custom barcode scanner UI -->
+      <div class="scanner-container">
+        <div class="scanner-frame">
+          <div class="scanner-line"></div>
+          <div class="scanner-corners"></div>
+          
+          <!-- Loading indicator -->
+          <div class="scanner-loading" *ngIf="isScanning">
+            <ion-spinner name="circular"></ion-spinner>
+            <p>Scanning...</p>
+          </div>
+        </div>
+        
+        <p class="scanner-instruction">Position the barcode within the frame</p>
+        
+        <!-- Scanner controls -->
+        <div class="scanner-controls">
+          <ion-button expand="block" class="scan-button" (click)="scanBarcode()" [disabled]="isScanning">
+            <ion-icon name="scan-outline" slot="start"></ion-icon>
+            Scan Barcode
+          </ion-button>
+          
+          <!-- Manual barcode input for testing -->
+          <div class="manual-input">
+            <ion-item>
+              <ion-label position="floating">Enter Barcode Manually</ion-label>
+              <ion-input type="text" [(ngModel)]="manualBarcodeInput"></ion-input>
+            </ion-item>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Instructions and samples section -->
+    <div class="instructions-section">
+      <!-- Instructions for real barcode scanning -->
+      <div class="scanning-instructions">
+        <h4>How to Scan Real Barcodes:</h4>
+        <ol>
+          <li>Click the "Scan Barcode" button above</li>
+          <li>Allow camera access when prompted</li>
+          <li>Point your camera at a barcode</li>
+          <li>Hold steady until the barcode is detected</li>
+          <li>The app will automatically show product details</li>
+        </ol>
+      </div>
+
+      <!-- Sample barcodes for testing -->
+      <div class="sample-barcodes">
+        <h4>Sample Barcodes for Testing:</h4>
+        <div class="barcode-grid">
+          <ion-button fill="outline" size="small" (click)="useTestBarcode('1234567890')">
+            Bananas (1234567890)
+          </ion-button>
+          <ion-button fill="outline" size="small" (click)="useTestBarcode('5901234123457')">
+            Coffee (5901234123457)
+          </ion-button>
+          <ion-button fill="outline" size="small" (click)="useTestBarcode('4011')">
+            Apples (4011)
+          </ion-button>
+          <ion-button fill="outline" size="small" (click)="useTestBarcode('8901072000126')">
+            Tea (8901072000126)
+          </ion-button>
+          <ion-button fill="outline" size="small" (click)="useTestBarcode('7622210100146')">
+            Cookies (7622210100146)
+          </ion-button>
+          <ion-button fill="outline" size="small" (click)="useTestBarcode('12345678')">
+            Noodles (12345678)
+          </ion-button>
+          <ion-button fill="outline" size="small" (click)="useTestBarcode('9780201379624')">
+            Book (9780201379624)
+          </ion-button>
+          <ion-button fill="outline" size="small" (click)="useTestBarcode('1234')">
+            Salt (1234)
+          </ion-button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <!-- Camera view overlay for scanning -->
+  <div class="camera-overlay" *ngIf="isScanning">
+    <div class="camera-frame">
+      <div class="camera-corners"></div>
+      <div class="camera-scan-line"></div>
+    </div>
+    <div class="camera-controls">
+      <ion-button (click)="cancelScan()" color="light" fill="solid" shape="round">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  
+  <!-- Error alert -->
+  <ion-alert
+    [isOpen]="scanError"
+    header="Scan Error"
+    [message]="errorMessage"
+    [buttons]="['OK']"
+    (didDismiss)="dismissError()"
+  ></ion-alert>
+</ion-content>

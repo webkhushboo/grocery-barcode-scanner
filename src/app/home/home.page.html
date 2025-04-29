@@ -1,20 +1,73 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Blank
+      Grocery Scanner
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="home-container">
+    <!-- Hero section -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>Grocery Barcode Scanner</h1>
+        <p>Scan product barcodes to instantly view detailed product information</p>
+        
+        <ion-button (click)="openScanner()" expand="block" size="large" class="scan-button">
+          <ion-icon name="barcode-outline" slot="start"></ion-icon>
+          Scan Now
+        </ion-button>
+      </div>
+    </div>
+    
+    <!-- Features section -->
+    <div class="features-section">
+      <h2>Features</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <ion-icon name="scan-outline"></ion-icon>
+          </div>
+          <h3>Quick Scanning</h3>
+          <p>Instantly scan any product barcode with your device camera</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <ion-icon name="information-circle-outline"></ion-icon>
+          </div>
+          <h3>Detailed Info</h3>
+          <p>Get comprehensive product details including price and availability</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <ion-icon name="flash-outline"></ion-icon>
+          </div>
+          <h3>Fast Results</h3>
+          <p>See product information in seconds with our optimized scanner</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <ion-icon name="phone-portrait-outline"></ion-icon>
+          </div>
+          <h3>User Friendly</h3>
+          <p>Modern interface designed for the best user experience</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Call to action -->
+    <div class="cta-section">
+      <h2>Ready to scan?</h2>
+      <p>Try scanning one of our sample barcodes or any product barcode</p>
+      <ion-button (click)="openScanner()" expand="block">
+        <ion-icon name="barcode-outline" slot="start"></ion-icon>
+        Start Scanning
+      </ion-button>
+    </div>
   </div>
 </ion-content>

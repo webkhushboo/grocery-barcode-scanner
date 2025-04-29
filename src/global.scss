@@ -35,3 +35,45 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/**
+ * Barcode Scanner Styles
+ * -----------------------------------------------------
+ * These styles are used for the native barcode scanner
+ */
+.scanner-active {
+  --background: transparent;
+  --ion-background-color: transparent;
+  background: transparent;
+  
+  ion-content {
+    --background: transparent;
+  }
+  
+  ion-header,
+  ion-toolbar,
+  ion-footer,
+  .scanner-container {
+    display: none;
+  }
+}
+
+/* QR Code sample styles for testing */
+.qr-code-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  
+  img {
+    max-width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--ion-color-medium);
+  }
+}

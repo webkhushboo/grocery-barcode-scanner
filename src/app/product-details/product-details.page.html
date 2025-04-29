@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Product Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Loading spinner -->
+  <div class="loading-container" *ngIf="loading">
+    <ion-spinner name="circular"></ion-spinner>
+    <p>Loading product details...</p>
+  </div>
+
+  <!-- Product details card -->
+  <div class="product-container" *ngIf="!loading && product">
+    <!-- Product hero section with image -->
+    <div class="product-hero">
+      <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
+      <div class="product-overlay">
+        <div class="product-category">{{ product.category }}</div>
+        <div class="product-price" [ngClass]="{'out-of-stock': !product.inStock}">
+          {{ product.price }}
+          <span class="stock-badge" *ngIf="!product.inStock">Out of Stock</span>
+          <span class="stock-badge in-stock" *ngIf="product.inStock">In Stock</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product info section -->
+    <div class="product-info">
+      <h1 class="product-name">{{ product.name }}</h1>
+      <p class="product-id">Product ID: {{ productId }}</p>
+      
+      <div class="product-description">
+        <h2>Description</h2>
+        <p>{{ product.description }}</p>
+      </div>
+
+      <!-- Product details grid -->
+      <div class="product-details-grid">
+        <div class="detail-item">
+          <ion-icon name="business-outline" color="primary"></ion-icon>
+          <div class="detail-content">
+            <h3>Manufacturer</h3>
+            <p>{{ product.manufacturer }}</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <ion-icon name="scale-outline" color="primary"></ion-icon>
+          <div class="detail-content">
+            <h3>Weight</h3>
+            <p>{{ product.weight }}</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <ion-icon name="folder-outline" color="primary"></ion-icon>
+          <div class="detail-content">
+            <h3>Category</h3>
+            <p>{{ product.category }}</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <ion-icon [name]="product.inStock ? 'checkmark-circle-outline' : 'close-circle-outline'" 
+                   [color]="product.inStock ? 'success' : 'danger'"></ion-icon>
+          <div class="detail-content">
+            <h3>Availability</h3>
+            <p>{{ product.inStock ? 'In Stock' : 'Out of Stock' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="action-buttons">
+        <ion-button expand="block" color="primary" [disabled]="!product.inStock">
+          <ion-icon name="cart-outline" slot="start"></ion-icon>
+          Add to Cart
+        </ion-button>
+        <ion-button expand="block" fill="outline" color="medium" (click)="goBack()">
+          <ion-icon name="arrow-back" slot="start"></ion-icon>
+          Back to Scanner
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error message if product not found -->
+  <div class="error-container" *ngIf="!loading && !product">
+    <div class="error-icon">
+      <ion-icon name="alert-circle-outline" color="danger"></ion-icon>
+    </div>
+    <h2 class="error-title">Product Not Found</h2>
+    <p class="error-message">Sorry, we couldn't find any product with the barcode: {{ productId }}</p>
+    <ion-button expand="block" (click)="goBack()" class="ion-margin-top">
+      <ion-icon name="arrow-back" slot="start"></ion-icon>
+      Go Back
+    </ion-button>
+  </div>
+</ion-content>
